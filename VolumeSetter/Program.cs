@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using NAudio.CoreAudioApi;
 
 namespace VolumeSetter
 {
@@ -21,22 +20,8 @@ namespace VolumeSetter
                     MessageBoxIcon.Error);
                 Environment.Exit(1);
             }
-            SetVolumeLevel(level);
-        }
-
-        private static void SetVolumeLevel(int value)
-        {
-            try
-            {
-                var devEnum = new MMDeviceEnumerator();
-                MMDevice device = devEnum.GetDefaultAudioEndpoint(0, (Role) 1);
-                device.AudioEndpointVolume.MasterVolumeLevelScalar = value/100.0f;
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(1);
-            }
+            VolumeChanger volumeChanger = new VolumeChanger();
+            volumeChanger.SetVolumeLevel(level);
         }
     }
 }
