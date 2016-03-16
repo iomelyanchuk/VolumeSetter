@@ -7,18 +7,22 @@ namespace VolumeSetter
     {
         static void Main(string[] args)
         {
+            int level;
             if (args.Length < 1)
             {
-                MessageBox.Show("Usage: VolumeSetter <num>", "Usage", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Environment.Exit(1);
+                //MessageBox.Show("Usage: VolumeSetter <num>", "Usage", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //Environment.Exit(1);
+                level = Properties.Settings.Default.DefaultVolume;
             }
-            int level;
-            bool result = int.TryParse(args[0], out level);
-            if (!result || level < 0 || level > 100)
+            else
             {
-                MessageBox.Show("Volume level must be from 0 to 100", "Parameter error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                Environment.Exit(1);
+                bool result = int.TryParse(args[0], out level);
+                if (!result)
+                {
+                    MessageBox.Show("Volume level must be from 0 to 100", "Parameter error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    Environment.Exit(1);
+                }
             }
             VolumeChanger volumeChanger = new VolumeChanger();
             volumeChanger.SetVolumeLevel(level);
