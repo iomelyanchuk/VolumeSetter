@@ -11,7 +11,7 @@ namespace VolumeSetter
     class VolumeChanger
     {
         private MMDevice _audioDevice;
-        private bool _isInit = false;
+        private bool _isInit;
 
         /// <summary>
         /// Инициализация основного аудио устройства
