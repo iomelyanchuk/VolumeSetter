@@ -4,12 +4,17 @@ using NAudio.CoreAudioApi;
 
 namespace VolumeSetter
 {
-    class VolumeChanger
+    internal class VolumeChanger
     {
         private MMDevice _audioDevice;
 
+        public VolumeChanger()
+        {
+            InitDevice();
+        }
+
         /// <summary>
-        /// Инициализация основного аудио устройства
+        ///     Инициализация основного аудио устройства
         /// </summary>
         private void InitDevice()
         {
@@ -25,7 +30,7 @@ namespace VolumeSetter
         }
 
         /// <summary>
-        /// Установка уровня звука
+        ///     Установка уровня звука
         /// </summary>
         /// <param name="level">уровень звука от 0 до 100</param>
         public void SetVolumeLevel(int level)
@@ -37,22 +42,18 @@ namespace VolumeSetter
             }
             if (level < 0 || level > 100)
             {
-                MessageBox.Show("Volume level must be from 0 to 100", "Parameter error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Volume level must be from 0 to 100", "Parameter error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
             try
             {
-                _audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = level / 100.0f;
+                _audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = level/100.0f;
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        public VolumeChanger()
-        {
-            InitDevice();
         }
     }
 }

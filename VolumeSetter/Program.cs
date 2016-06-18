@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace VolumeSetter
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length < 1)
             {
@@ -17,7 +17,8 @@ namespace VolumeSetter
                 int level;
                 if (!int.TryParse(args[0], out level))
                 {
-                    MessageBox.Show("Volume level must be from 0 to 100", "Parameter error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Volume level must be from 0 to 100", "Parameter error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                     Environment.Exit(1);
                 }
                 new VolumeChanger().SetVolumeLevel(level);
