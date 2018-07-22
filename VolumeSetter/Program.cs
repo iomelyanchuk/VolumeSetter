@@ -14,8 +14,7 @@ namespace VolumeSetter
             }
             else
             {
-                int level;
-                if (!int.TryParse(args[0], out level))
+                if (!int.TryParse(args[0], out var level))
                 {
                     MessageBox.Show("Volume level must be from 0 to 100", "Parameter error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
